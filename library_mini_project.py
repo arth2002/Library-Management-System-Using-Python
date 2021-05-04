@@ -1,7 +1,7 @@
 import datetime
 import ast
 
-#Author: KingAp7
+
 class Library:
 
     def __init__(self, listOfBooks, libraryName):
@@ -14,9 +14,10 @@ class Library:
 
     def lendBook(self, bookName, lenderName):
         if bookName != self.listOfBooks:
-            print("Sorry Your requested book is not available..")
-        self.listOfBooks.remove(bookName)
-        return f"{lenderName} take the book {bookName}"
+            return "Sorry Your requested book is not available..."
+        else:
+            self.listOfBooks.remove(bookName)
+            return f"{lenderName} take the book {bookName}"
 
     def returnBook(self, bookName):
         self.listOfBooks.append(bookName)
@@ -46,10 +47,13 @@ if __name__ == "__main__":
                 user_name = input("Enter Your name: ")
                 print(ap.lendBook(book, user_name))
                 time = datetime.datetime.now()
-                with open("logOfLibrary.txt", "a")as f:
-                    f.write(
-                        f"* Lender Name:{user_name}\n Book Name: {book}\n Lending Time: {time}")
-                    f.write("\n")
+                if book == ap.listOfBooks:
+                    with open("logOfLibrary.txt", "a")as f:
+                        f.write(
+                            f"* Lender Name:{user_name}\n Book Name: {book}\n Lending Time: {time}")
+                        f.write("\n")
+                else:
+                    continue
 
             if user_choice == 3:
                 print(ap.listOfBooks)
